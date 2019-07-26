@@ -6,12 +6,20 @@
 	mutant_bodyparts = list("wings")
 	default_features = list("mcolor" = "FFF", "tail_human" = "None", "ears" = "None", "wings" = "Angel")
 	use_skintones = 1
-	no_equip = list(SLOT_BACK)
+	armor = 50
+	exotic_bloodtype = "Godblood"
 	limbs_id = "human"
 	skinned_type = /obj/item/stack/sheet/animalhide/human
+	inherent_traits = list(TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_IGNORESLOWDOWN, TRAIT_SLEEPIMMUNE, TRAIT_XRAY_VISION, TRAIT_NOSOFTCRIT,
+							TRAIT_NOGUNS, TRAIT_VIRUSIMMUNE, TRAIT_PIERCEIMMUNE, TRAIT_SHOCKIMMUNE, TRAIT_RADIMMUNE, TRAIT_NOHUNGER,
+							TRAIT_NOLIMBDISABLE, TRAIT_NOBREATH, TRAIT_STABLEHEART, TRAIT_RESISTCOLD, TRAIT_RESISTHEAT, TRAIT_STUNIMMUNE,
+							TRAIT_NODISMEMBER, TRAIT_NOFIRE, TRAIT_NODEATH,TRAIT_LIMBATTACHMENT,TRAIT_NOCRITDAMAGE,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,
+							TRAIT_TIMELESS,TRAIT_NOSLIPALL,TRAIT_MAGIC_CHOKE,TRAIT_STRONG_GRABBER,TRAIT_THERMAL_VISION,EYE_OF_GOD_TRAIT,HAND_REPLACEMENT_TRAIT)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | ERT_SPAWN
 
+
 	var/datum/action/innate/flight/fly
+
 
 /datum/species/angel/on_species_gain(mob/living/carbon/human/H, datum/species/old_species)
 	..()
@@ -20,6 +28,8 @@
 			H.dna.species.mutant_bodyparts |= "wings"
 		H.dna.features["wings"] = "Angel"
 		H.update_body()
+	H.ventcrawler = VENTCRAWLER_ALWAYS
+	H.grant_all_languages(omnitongue=TRUE)
 	if(ishuman(H) && !fly)
 		fly = new
 		fly.Grant(H)
@@ -134,6 +144,13 @@
 		H.setMovetype(H.movement_type | FLYING)
 		override_float = TRUE
 		H.pass_flags |= PASSTABLE
+		H.incorporeal_move = INCORPOREAL_MOVE_BASIC
+		ADD_TRAIT(H, TRAIT_SIXTHSENSE, GHOST_STONE_TRAIT)
+		ADD_TRAIT(H, TRAIT_XRAY_VISION, GHOST_STONE_TRAIT)
+		H.dna.add_mutation(SPACEMUT)
+		H.dna.add_mutation(TK)
+		H.see_invisible = SEE_INVISIBLE_OBSERVER
+		H.update_sight()
 		H.OpenWings()
 	else
 		stunmod = 1
@@ -141,4 +158,5 @@
 		H.setMovetype(H.movement_type & ~FLYING)
 		override_float = FALSE
 		H.pass_flags &= ~PASSTABLE
+		H.incorporeal_move = NONE
 		H.CloseWings()

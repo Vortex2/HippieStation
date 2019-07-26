@@ -69,8 +69,6 @@
 
 	var/old_len = authorized.len
 
-	HIPPIE_HOOK_SHUTTLE_AUTH
-	
 	switch(action)
 		if("authorize")
 			. = authorize(user)

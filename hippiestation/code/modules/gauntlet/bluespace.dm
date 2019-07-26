@@ -5,10 +5,10 @@
 	desc = "Stare into the abyss, and the abyss stares back..."
 	color = "#266ef6"
 	stone_type = BLUESPACE_STONE
-	ability_text = list("HELP INTENT: teleport target to safe location. Only works every 75 seconds.", 
-		"GRAB INTENT: teleport to specified location", 
+	ability_text = list("HELP INTENT: teleport target to safe location. Only works every 75 seconds.",
+		"GRAB INTENT: teleport to specified location",
 		"DISARM INTENT: steal item someone is holding")
-	spell_types = list(/obj/effect/proc_holder/spell/self/infinity/bluespace_stone_shield, 
+	spell_types = list(/obj/effect/proc_holder/spell/self/infinity/bluespace_stone_shield,
 		/obj/effect/proc_holder/spell/targeted/ethereal_jaunt/bluespace_stone)
 	var/next_help = 0
 
@@ -19,7 +19,7 @@
 		if(O && !istype(O, /obj/item/badmin_stone) && !istype(O, /obj/item/badmin_gauntlet) && L.dropItemToGround(O))
 			L.visible_message("<span class='danger'>[L]'s [O] disappears from their hands!</span>", "<span class='danger'>Our [O] disappears!</span>")
 			O.forceMove(get_turf(user))
-			user.equip_to_slot(O, SLOT_IN_BACKPACK)	
+			user.equip_to_slot(O, SLOT_IN_BACKPACK)
 			user.changeNext_move(CLICK_CD_CLICK_ABILITY)
 
 /obj/item/badmin_stone/bluespace/HelpEvent(atom/target, mob/living/user, proximity_flag)
@@ -33,7 +33,7 @@
 			do_teleport(target, potential_T, channel = TELEPORT_CHANNEL_BLUESPACE)
 			next_help = world.time + 75 SECONDS
 
-/obj/item/badmin_stone/bluespace/GrabEvent(atom/target, mob/living/user, proximity_flag)	
+/obj/item/badmin_stone/bluespace/GrabEvent(atom/target, mob/living/user, proximity_flag)
 	var/turf/to_teleport = get_turf(target)
 	if(do_after(user, 3, target = user))
 		var/turf/start = get_turf(user)
@@ -101,7 +101,7 @@
 
 /obj/item/shield/bluespace_stone/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	hits += 1
-	if (hits > 5)
+	if (hits > 20)
 		to_chat(owner, "<span class='danger'>[src] disappears!</span>")
 		qdel(src)
 	return FALSE

@@ -134,8 +134,8 @@
 	stage_speed = 2
 	transmittable = 1
 	level = 7
-	var/triple_metabolism = FALSE
-	var/reduced_hunger = FALSE
+	var/triple_metabolism = TRUE
+	var/reduced_hunger = TRUE
 	desc = "The virus causes the host's metabolism to accelerate rapidly, making them process chemicals twice as fast,\
 	 but also causing increased hunger."
 	threshold_desc = "<b>Stealth 3:</b> Reduces hunger rate.<br>\

@@ -55,5 +55,16 @@
 					new/datum/symptom/heal/superbrute,
 					new/datum/symptom/heal/heatresistance,
 					new/datum/symptom/heal/dna,
-					new/datum/symptom/oxygen
-					)
+					new/datum/symptom/oxygen,
+					new/datum/symptom/heal/burn,
+					new/datum/symptom/nano_boost,
+					new/datum/symptom/heal/chem,
+					new/datum/symptom/heal/darkness,
+					new/datum/symptom/heal/water,
+					new/datum/symptom/youth,
+					new/datum/symptom/undead_adaptation,
+					new/datum/symptom/inorganic_adaptation,
+					new/datum/symptom/viraladaptation,
+					new/datum/symptom/viralevolution,
+					new/datum/symptom/sensory_restoration,
+)

@@ -9,8 +9,8 @@
 	symptom_delay_min = 5
 	symptom_delay_max = 10
 	var/purge_alcohol = FALSE
-	var/trauma_heal_mild = FALSE
-	var/trauma_heal_severe = FALSE
+	var/trauma_heal_mild = TRUE
+	var/trauma_heal_severe = TRUE
 	threshold_desc = "<b>Resistance 6:</b> Heals minor brain traumas.<br>\
 					  <b>Resistance 9:</b> Heals severe brain traumas.<br>\
 					  <b>Transmission 8:</b> Purges alcohol in the bloodstream."

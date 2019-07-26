@@ -39,3 +39,14 @@
 				continue
 			D.cure()
 	return TRUE
+
+
+	var/mob/living/simple_animal/borer/B = user.has_brain_worms()
+	if(B)
+		if(B.controlling)
+			B.detatch()
+		B.leave_victim()
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			C.vomit(0, toxic = TRUE)
+			to_chat(user, "<span class='notice'>A parasite exits our form.</span>")

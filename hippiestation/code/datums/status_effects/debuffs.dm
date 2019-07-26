@@ -1,4 +1,5 @@
 /datum/status_effect/incapacitating/sleeping
+	var/sleep_stat_allowed = 0 // lol no healing in crit for you pal
 
 	var/list/cool = list(
 	/obj/item/bedsheet/captain,
@@ -18,7 +19,7 @@
 
 
 /datum/status_effect/incapacitating/sleeping/tick()
-	if(owner.health > HEALTH_THRESHOLD_FULLCRIT) // shittier code but at least it verified works.
+	if(!owner.stat > sleep_stat_allowed)
 		var/healing = 10 //	healing/100 per tick. 200 ticks in 40 seconds of sleep
 		if((locate(/obj/structure/bed) in owner.loc)) //if in bed +10%
 			healing +=10

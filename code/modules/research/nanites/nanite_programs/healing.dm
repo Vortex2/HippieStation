@@ -26,8 +26,8 @@
 			if(L.heal_damage(1/parts.len, 1/parts.len, null, BODYPART_ORGANIC))
 				host_mob.update_damage_overlays()
 	else
-		host_mob.adjustBruteLoss(-1, TRUE)
-		host_mob.adjustFireLoss(-1, TRUE)
+		host_mob.adjustBruteLoss(-5, TRUE)
+		host_mob.adjustFireLoss(-5, TRUE)
 
 /datum/nanite_program/temperature
 	name = "Temperature Adjustment"
@@ -59,7 +59,7 @@
 	return ..()
 
 /datum/nanite_program/purging/active_effect()
-	host_mob.adjustToxLoss(-1)
+	host_mob.adjustToxLoss(-5)
 	for(var/datum/reagent/R in host_mob.reagents.reagent_list)
 		host_mob.reagents.remove_reagent(R.type,1)
 
@@ -103,7 +103,7 @@
 /datum/nanite_program/blood_restoring/active_effect()
 	if(iscarbon(host_mob))
 		var/mob/living/carbon/C = host_mob
-		C.blood_volume += 2
+		C.blood_volume += 25
 
 /datum/nanite_program/repairing
 	name = "Mechanical Repair"
@@ -138,8 +138,8 @@
 		if(update)
 			host_mob.update_damage_overlays()
 	else
-		host_mob.adjustBruteLoss(-1, TRUE)
-		host_mob.adjustFireLoss(-1, TRUE)
+		host_mob.adjustBruteLoss(-25, TRUE)
+		host_mob.adjustFireLoss(-25, TRUE)
 
 /datum/nanite_program/purging_advanced
 	name = "Selective Blood Purification"
@@ -166,7 +166,7 @@
 	name = "Bio-Reconstruction"
 	desc = "The nanites manually repair and replace organic cells, acting much faster than normal regeneration. \
 			However, this program cannot detect the difference between harmed and unharmed, causing it to consume nanites even if it has no effect."
-	use_rate = 5.5
+	use_rate = 3.5
 	rogue_types = list(/datum/nanite_program/suffocating, /datum/nanite_program/necrotic)
 
 /datum/nanite_program/regenerative_advanced/active_effect()
@@ -182,8 +182,8 @@
 		if(update)
 			host_mob.update_damage_overlays()
 	else
-		host_mob.adjustBruteLoss(-3, TRUE)
-		host_mob.adjustFireLoss(-3, TRUE)
+		host_mob.adjustBruteLoss(-25, TRUE)
+		host_mob.adjustFireLoss(-25, TRUE)
 
 /datum/nanite_program/brain_heal_advanced
 	name = "Neural Reimaging"

@@ -108,8 +108,8 @@
 
 /obj/item/organ/heart/gland/heals
 	true_name = "coherency harmonizer"
-	cooldown_low = 200
-	cooldown_high = 400
+	cooldown_low = 100
+	cooldown_high = 200
 	uses = -1
 	icon_state = "health"
 	mind_control_uses = 3
@@ -117,7 +117,7 @@
 
 /obj/item/organ/heart/gland/heals/activate()
 	to_chat(owner, "<span class='notice'>You feel curiously revitalized.</span>")
-	owner.adjustToxLoss(-20, FALSE, TRUE)
+	owner.adjustToxLoss(-50, FALSE, TRUE)
 	owner.heal_bodypart_damage(20, 20, 0, TRUE)
 	owner.adjustOxyLoss(-20)
 

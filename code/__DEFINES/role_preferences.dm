@@ -24,6 +24,7 @@
 #define ROLE_REVENANT			"Revenant"
 #define ROLE_DEVIL				"Devil"
 #define ROLE_SERVANT_OF_RATVAR	"Servant of Ratvar"
+#define ROLE_BORER				"borer"
 #define ROLE_BROTHER			"Blood Brother"
 #define ROLE_BRAINWASHED		"Brainwashed Victim"
 #define ROLE_OVERTHROW			"Syndicate Mutineer"
@@ -41,6 +42,7 @@
 #define ROLE_GANG				"gangster" // hippie -- adds gang related role
 #define ROLE_INFILTRATOR		"syndicate infiltrator" // hippie -- adds infiltrator role
 #define ROLE_KOTD				"Syndicate Recruit (KotD)" // hippie -- adds KotD role
+#define ROLE_PILLARMEN 			"Pillar Man" // hippie -- adds pillar men
 
 //Missing assignment means it's not a gamemode specific role, IT'S NOT A BUG OR ERROR.
 //The gamemode specific ones are just so the gamemodes can query whether a player is old enough
@@ -63,6 +65,7 @@ GLOBAL_LIST_INIT(special_roles, list(
 	ROLE_REVENANT,
 	ROLE_ABDUCTOR,
 	ROLE_DEVIL = /datum/game_mode/devil,
+	ROLE_BORER,
 	ROLE_SERVANT_OF_RATVAR = /datum/game_mode/clockwork_cult,
 	ROLE_OVERTHROW = /datum/game_mode/overthrow,
 	ROLE_HIVE = /datum/game_mode/hivemind,
@@ -72,7 +75,8 @@ GLOBAL_LIST_INIT(special_roles, list(
 	ROLE_VAMPIRE = /datum/game_mode/vampire, // hippie -- adds vampire role=gamemode
 	ROLE_GANG = /datum/game_mode/gang, // hippie -- adds gang role=gamemode
 	ROLE_INFILTRATOR = /datum/game_mode/infiltration, // hippie -- adds infiltrator role=gamemode
-	ROLE_KOTD = /datum/game_mode/traitor/kotd // hippie -- adds KotD role=gamemode
+	ROLE_KOTD = /datum/game_mode/traitor/kotd, // hippie -- adds KotD role=gamemode
+	ROLE_PILLARMEN = /datum/game_mode/pillarmen // hippie -- adds pillar men role=gamemode
 ))
 
 //Job defines for what happens when you fail to qualify for any job during job selection

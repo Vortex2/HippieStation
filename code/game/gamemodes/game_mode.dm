@@ -25,6 +25,7 @@
 	var/list/datum/mind/antag_candidates = list()	// List of possible starting antags goes here
 	var/list/restricted_jobs = list()	// Jobs it doesn't make sense to be.  I.E chaplain or AI cultist
 	var/list/protected_jobs = list()	// Jobs that can't be traitors because
+	var/list/restricted_races = list()	// hippie -- typecache of restricted races
 	var/list/required_jobs = list()		// alternative required job groups eg list(list(cap=1),list(hos=1,sec=2)) translates to one captain OR one hos and two secmans
 	var/required_players = 0
 	var/maximum_players = -1 // -1 is no maximum, positive numbers limit the selection of a mode on overstaffed stations
@@ -118,7 +119,8 @@
 		replacementmode.make_antag_chance(character)
 	return
 
-/* HANDLED IN HIPPIESTATION GAME_MODE.DM  - MODULE: SHUTTLE TOGGLE - Changes here too.
+	/* HANDLED IN HIPPIESTATION GAME_MODE.DM  - MODULE: SHUTTLE TOGGLE - Changes here too.
+
 ///Allows rounds to basically be "rerolled" should the initial premise fall through. Also known as mulligan antags.
 /datum/game_mode/proc/convert_roundtype()
 	set waitfor = FALSE
@@ -147,7 +149,7 @@
 	replacementmode = pickweight(usable_modes)
 
 	switch(SSshuttle.emergency.mode) //Rounds on the verge of ending don't get new antags, they just run out
-		if(SHUTTLE_STRANDED, SHUTTLE_ESCAPE, SHUTTLE_DISABLED) //MODULE: SHUTTLE TOGGLE
+	if(SHUTTLE_STRANDED, SHUTTLE_ESCAPE, SHUTTLE_DISABLED) //MODULE: SHUTTLE TOGGLE)
 			return 1
 		if(SHUTTLE_CALL)
 			if(SSshuttle.emergency.timeLeft(1) < initial(SSshuttle.emergencyCallTime)*0.5)
@@ -382,6 +384,13 @@
 				if(player.assigned_role == job)
 					candidates -= player
 
+					// hippie start -- no lizards as pillar men
+	if(restricted_races)
+		for(var/datum/mind/M in drafted)
+			if(is_type_in_typecache(M.current.client.prefs.pref_species, typecacheof(restricted_races)))
+				drafted -= M
+	// hippie end
+
 	if(candidates.len < recommended_enemies)
 		for(var/mob/dead/new_player/player in players)
 			if(player.client && player.ready == PLAYER_READY_TO_PLAY)
@@ -588,3 +597,42 @@
 		SSticker.news_report = STATION_EVACUATED
 		if(SSshuttle.emergency.is_hijacked())
 			SSticker.news_report = SHUTTLE_HIJACK
+
+
+/*			if(GLOB.borers.len)
+		var/borerwin = FALSE
+		var/borertext = "<br><font size=3><b>The borers were:</b></font>"
+		for(var/mob/living/simple_animal/borer/B in GLOB.borers)
+			if((B.key || B.controlling) && B.stat != DEAD)
+				borertext += "<br>[B.controlling ? B.victim.key : B.key] was [B.truename] ("
+				var/turf/location = get_turf(B)
+				if(location.z == ZLEVEL_CENTCOM && B.victim)
+					borertext += "escaped with host"
+				else
+					borertext += "failed"
+				borertext += ")"
+		to_chat(world, borertext)
+
+ 		var/total_borers = 0
+		for(var/mob/living/simple_animal/borer/B in GLOB.borers)
+			if((B.key || B.victim) && B.stat != DEAD)
+				total_borers++
+		if(total_borers)
+			var/total_borer_hosts = 0
+			for(var/mob/living/carbon/C in GLOB.mob_list)
+				var/mob/living/simple_animal/borer/D = C.has_brain_worms()
+				var/turf/location = get_turf(C)
+				if(location.z == ZLEVEL_CENTCOM && D && D.stat != DEAD)
+					total_borer_hosts++
+			if(GLOB.total_borer_hosts_needed <= total_borer_hosts)
+				borerwin = TRUE
+			to_chat(world, "<b>There were [total_borers] borers alive at round end!</b>")
+			to_chat(world, "<b>A total of [total_borer_hosts] borers with hosts escaped on the shuttle alive. The borers needed [GLOB.total_borer_hosts_needed] hosts to escape.</b>")
+			if(borerwin)
+				to_chat(world, "<b><font color='green'>The borers were successful!</font></b>")
+			else
+				to_chat(world, "<b><font color='red'>The borers have failed!</font></b>")
+
+ 		CHECK_TICK
+
+*/

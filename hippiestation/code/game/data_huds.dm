@@ -47,3 +47,4 @@
 		holder.icon_state = "hudtracking"
 	else
 		holder.icon_state = null
+

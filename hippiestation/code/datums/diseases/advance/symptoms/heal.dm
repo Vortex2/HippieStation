@@ -29,14 +29,14 @@
 	level = 0
 
 /datum/symptom/heal/plasma
-	stealth = 0
+	stealth = 10
 	resistance = 3
 	stage_speed = -2
 	transmittable = -2
 	level = 6
 
 /datum/symptom/heal/plasma/Heal(mob/living/carbon/M, datum/disease/advance/A, actual_power)
-	var/heal_amt = 4 * actual_power
+	var/heal_amt = 10 * actual_power
 
 	if(M.fire_stacks > 0)	//New hippie add, otherwise you die from plasma fires even if you're doing the suck on the plasma
 		actual_power = actual_power + (M.fire_stacks*0.75)
@@ -98,7 +98,7 @@
 	threshold_desc = ""
 
 /datum/symptom/heal/supertoxin/Heal(mob/living/M, datum/disease/advance/A)
-	var/heal_amt = 4
+	var/heal_amt = 10
 	M.adjustToxLoss(-heal_amt)
 	return TRUE
 
@@ -114,10 +114,10 @@
 
 /datum/symptom/heal/brute/Start(datum/disease/advance/A)
 	if(A.properties["stage_rate"] >= 6) //stronger healing
-		power = 2
+		power = 20
 
 /datum/symptom/heal/brute/Heal(mob/living/carbon/M, datum/disease/advance/A)
-	var/heal_amt = 1 * power
+	var/heal_amt = 4 * power
 	var/list/parts = M.get_damaged_bodyparts(1,1) //1,1 because it needs inputs.
 
 	if(!parts.len)
@@ -132,7 +132,7 @@
 /datum/symptom/heal/superbrute
 	name = "Flesh Mending"
 	desc = "The virus rapidly mutates into body cells, effectively allowing it to quickly fix the host's wounds."
-	stealth = 0
+	stealth = 3
 	resistance = 0
 	stage_speed = -2
 	transmittable = -2
@@ -141,10 +141,10 @@
 
 /datum/symptom/heal/superbrute/Start(datum/disease/advance/A)
 	if(A.properties["stage_rate"] >= 6) //stronger healing
-		power = 2
+		power = 20
 
 /datum/symptom/heal/superbrute/Heal(mob/living/carbon/M, datum/disease/advance/A)
-	var/heal_amt = 4 * power
+	var/heal_amt = 10 * power
 
 	var/list/parts = M.get_damaged_bodyparts(1,1) //1,1 because it needs inputs.
 
@@ -173,10 +173,10 @@
 
 /datum/symptom/heal/burn/Start(datum/disease/advance/A)
 	if(A.properties["stage_rate"] >= 6) //stronger healing
-		power = 2
+		power = 20
 
 /datum/symptom/heal/burn/Heal(mob/living/carbon/M, datum/disease/advance/A)
-	var/heal_amt = 1 * power
+	var/heal_amt = 2 * power
 
 	var/list/parts = M.get_damaged_bodyparts(1,1) //1,1 because it needs inputs.
 
