@@ -405,7 +405,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 	victim = C
 	forceMove(victim)
 
-	RemoveBorerActions()
+//	RemoveBorerActions()
 	GrantInfestActions()
 
 	log_game("[src]/([src.ckey]) has infested [victim]/([victim.ckey]")

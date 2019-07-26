@@ -55,6 +55,11 @@
 		BT.on_lose(TRUE)
 		BT.owner = null
 
+	if(!special)
+		if(C.has_brain_worms())
+			var/mob/living/simple_animal/borer/B = C.has_brain_worms()
+			B.leave_victim() //Should remove borer if the brain is removed - RR
+
 	if((!gc_destroyed || (owner && !owner.gc_destroyed)) && !no_id_transfer)
 		transfer_identity(C)
 	C.update_hair()

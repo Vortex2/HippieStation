@@ -68,10 +68,6 @@
 				stat("Tank Pressure", internal.air_contents.return_pressure())
 				stat("Distribution Pressure", internal.distribute_pressure)
 
-				//var/mob/living/simple_animal/borer/B = has_brain_worms()
-					//if(B.controlling)
-				//stat("Chemicals", B.chemicals)
-
 		if(mind)
 			var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
 			if(changeling)
@@ -81,6 +77,10 @@
 			if(hivemind)
 				stat("Hivemind Vessels", "[hivemind.hive_size] (+[hivemind.size_mod])")
 				stat("Psychic Link Duration", "[(hivemind.track_bonus + TRACKER_DEFAULT_TIME)/10] seconds")
+
+			var/mob/living/simple_animal/borer/B = has_brain_worms()
+			if(B && B.controlling)
+				stat("Chemicals", B.chemicals)
 
 	//NINJACODE
 	if(istype(wear_suit, /obj/item/clothing/suit/space/space_ninja)) //Only display if actually a ninja.
