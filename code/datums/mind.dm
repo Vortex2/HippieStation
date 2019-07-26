@@ -59,6 +59,7 @@
 	var/datum/language_holder/language_holder
 	var/unconvertable = FALSE
 	var/late_joiner = FALSE
+	var/no_cloning_at_all = FALSE
 
 	var/last_death = 0
 

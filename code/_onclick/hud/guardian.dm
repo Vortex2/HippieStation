@@ -10,6 +10,9 @@
 	using.screen_loc = ui_hand_position(2)
 	static_inventory += using
 
+	 // hippie - get rid of guardian types
+	 /*
+
 	using = new /obj/screen/guardian/Recall()
 	using.screen_loc = ui_hand_position(1)
 	static_inventory += using
@@ -84,6 +87,7 @@
 				D.internal_storage.screen_loc = null
 
 	..()
+	*/
 
 /obj/screen/guardian
 	icon = 'icons/mob/guardian.dmi'
