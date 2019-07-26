@@ -255,3 +255,7 @@
 		to_chat(src, "You can't commit suicide whilst immobile! ((You can type Ghost instead however.))")
 		return
 	return TRUE
+
+	if(has_brain_worms())
+		to_chat(src, "You can't bring yourself to commit suicide!")
+		return

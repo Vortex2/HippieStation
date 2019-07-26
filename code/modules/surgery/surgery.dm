@@ -150,6 +150,9 @@
 		if(beep.requires_tech)
 			surgeries += beep
 
+
+
+
 //INFO
 //Check /mob/living/carbon/attackby for how surgery progresses, and also /mob/living/carbon/attack_hand.
 //As of Feb 21 2013 they are in code/modules/mob/living/carbon/carbon.dm, lines 459 and 51 respectively.

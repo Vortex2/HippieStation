@@ -15,6 +15,17 @@
 		user.getorgan(/obj/item/organ/body_egg),
 		user.getorgan(/obj/item/organ/zombie_infection))
 
+	var/mob/living/simple_animal/borer/B = user.has_brain_worms()
+	if(B)
+		if(B.controlling)
+			B.detatch()
+		B.leave_victim()
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			C.vomit(0, toxic = TRUE)
+			to_chat(user, "<span class='notice'>A parasite exits our form.</span>")
+
+
 	for(var/o in bad_organs)
 		var/obj/item/organ/O = o
 		if(!istype(O))
@@ -39,14 +50,3 @@
 				continue
 			D.cure()
 	return TRUE
-
-
-	var/mob/living/simple_animal/borer/B = user.has_brain_worms()
-	if(B)
-		if(B.controlling)
-			B.detatch()
-		B.leave_victim()
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			C.vomit(0, toxic = TRUE)
-			to_chat(user, "<span class='notice'>A parasite exits our form.</span>")

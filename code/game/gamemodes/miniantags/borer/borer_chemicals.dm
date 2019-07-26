@@ -1,8 +1,8 @@
 /datum/borer_chem
 	var/chemname
 	var/chem_desc = "This is a chemical"
-	var/chemuse = 30
-	var/quantity = 10
+	var/chemuse = 1
+	var/quantity = 25
 
 /datum/borer_chem/epinephrine
 	chemname = "epinephrine"

@@ -577,6 +577,8 @@ GENE SCANNER
 			to_chat(user, "<span class='notice'>Instability of the last fusion reaction: [instability].</span>")
 	return TRUE
 
+
+
 //slime scanner
 
 /obj/item/slime_scanner

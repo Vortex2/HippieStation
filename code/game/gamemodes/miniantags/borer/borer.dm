@@ -40,14 +40,14 @@
 	to_chat(src, "<span class='danger'>You begin doggedly resisting the parasite's control (this will take approximately 40 seconds).</span>")
 	to_chat(B.victim, "<span class='danger'>You feel the captive mind of [src] begin to resist your control.</span>")
 
-	var/delay = rand(150,250) + B.victim.brainloss
+	var/delay = rand(350,450)
 	addtimer(CALLBACK(src, .proc/return_control, src.loc), delay)
 
 /mob/living/captive_brain/proc/return_control(mob/living/simple_animal/borer/B)
     if(!B || !B.controlling)
         return
 
-    B.victim.adjustBrainLoss(rand(5,10))
+    B.victim.adjustBrainLoss(rand(1,2))
     to_chat(src, "<span class='danger'>With an immense exertion of will, you regain control of your body!</span>")
     to_chat(B.victim, "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>")
     B.detatch()
@@ -62,8 +62,8 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 	icon_state = "brainslug"
 	icon_living = "brainslug"
 	icon_dead = "brainslug_dead"
-	health = 20
-	maxHealth = 20
+	health = 100
+	maxHealth = 100
 	melee_damage_lower = 5
 	melee_damage_upper = 5
 	stop_automated_movement = TRUE
@@ -75,7 +75,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 	ventcrawler = VENTCRAWLER_ALWAYS
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
-	maxbodytemp = 1500
+	maxbodytemp = 15000
 
 	var/generation = 1
 	var/static/list/borer_names = list(
@@ -89,7 +89,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 	var/docile = FALSE
 	var/bonding = FALSE
 	var/controlling = FALSE
-	var/chemicals = 10
+	var/chemicals = 250
 	var/used_dominate
 	var/borer_chems = list()
 	var/leaving = FALSE
@@ -162,8 +162,8 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 			attack_ghost(ghost)
 
 /mob/living/simple_animal/borer/attack_ghost(mob/user)
-	if(jobban_isbanned(user, ROLE_BORER) || jobban_isbanned(user, "Syndicate"))
-		return
+//	if(jobban_isbanned(user, ROLE_BORER) || jobban_isbanned(user, "Syndicate"))
+//		return
 	if(key)
 		return
 	if(stat != CONSCIOUS)
@@ -305,8 +305,8 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 				if(prob(5))
 					victim.adjustBrainLoss(rand(1,2))
 
-				if(prob(victim.brainloss/10))
-					victim.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
+			//	if(prob(victim.brainloss/10))
+			//		victim.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
 
 /mob/living/simple_animal/borer/proc/wakeup()
 	if(controlling)
@@ -658,7 +658,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 
 	bonding = TRUE
 
-	var/delay = 200+(victim.brainloss*5)
+	var/delay = 100
 	addtimer(CALLBACK(src, .proc/assume_control), delay)
 
 /mob/living/simple_animal/borer/proc/assume_control()
@@ -669,8 +669,8 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 	if(docile)
 		to_chat(src, "<span class='warning'>You are feeling far too docile to do that.</span>")
 		return
-	if(is_servant_of_ratvar(victim) || iscultist(victim) || victim.isloyal())
-		to_chat(src, "<span class='warning'>[victim]'s mind seems to be blocked by some unknown force!</span>")
+//	if(is_servant_of_ratvar(victim) || iscultist(victim) || victim.isloyal())
+	//	to_chat(src, "<span class='warning'>[victim]'s mind seems to be blocked by some unknown force!</span>")
 		return
 
 	else
@@ -1060,7 +1060,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 /datum/action/innate/borer/jumpstart_host
 	name = "Jumpstart Host"
 	desc = "Bring your host back to life."
-	icon_icon = 'icons/obj/weapons.dmi'
+//	icon_icon = 'icons/obj/weapons.dmi'
 	button_icon_state = "defibpaddles0"
 
 /datum/action/innate/borer/jumpstart_host/Activate()

@@ -68,6 +68,10 @@
 				stat("Tank Pressure", internal.air_contents.return_pressure())
 				stat("Distribution Pressure", internal.distribute_pressure)
 
+				//var/mob/living/simple_animal/borer/B = has_brain_worms()
+					//if(B.controlling)
+				//stat("Chemicals", B.chemicals)
+
 		if(mind)
 			var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
 			if(changeling)
@@ -626,7 +630,7 @@
 
 		var/they_breathe = !HAS_TRAIT(C, TRAIT_NOBREATH)
 		var/they_lung = C.getorganslot(ORGAN_SLOT_LUNGS)
-		
+
 		if(C.health > C.crit_threshold)
 			return
 
@@ -845,7 +849,7 @@
 
 /mob/living/carbon/human/proc/fireman_carry(mob/living/carbon/target)
 	if(can_be_firemanned(target))
-		visible_message("<span class='notice'>[src] starts lifting [target] onto their back...</span>", 
+		visible_message("<span class='notice'>[src] starts lifting [target] onto their back...</span>",
 			"<span class='notice'>You start lifting [target] onto your back...</span>")
 		if(do_after(src, 50, TRUE, target))
 			//Second check to make sure they're still valid to be carried
@@ -891,14 +895,14 @@
 
 	if(hands_needed || target_hands_needed)
 		if(hands_needed && !equipped_hands_self)
-			src.visible_message("<span class='warning'>[src] can't get a grip on [target] because their hands are full!</span>", 
+			src.visible_message("<span class='warning'>[src] can't get a grip on [target] because their hands are full!</span>",
 				"<span class='warning'>You can't get a grip on [target] because your hands are full!</span>")
 			return
 		else if(target_hands_needed && !equipped_hands_target)
 			target.visible_message("<span class='warning'>[target] can't get a grip on [src] because their hands are full!</span>",
 				"<span class='warning'>You can't get a grip on [src] because your hands are full!</span>")
 			return
-	
+
 	stop_pulling()
 	riding_datum.handle_vehicle_layer()
 	. = ..(target, force, check_loc)

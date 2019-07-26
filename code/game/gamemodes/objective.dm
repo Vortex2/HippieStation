@@ -10,6 +10,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	var/target_amount = 0				//If they are focused on a particular number. Steal objectives have their own counter.
 	var/completed = 0					//currently only used for custom objectives.
 	var/martyr_compatible = 0			//If the objective is compatible with martyr objective, i.e. if you can still do it while dead.
+	var/total_borers = 0
 
 /datum/objective/New(var/text)
 	if(text)

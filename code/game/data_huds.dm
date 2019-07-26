@@ -194,6 +194,8 @@
 				holder.icon_state = "huddefib"
 				return
 		holder.icon_state = "huddead"
+	else if(has_brain_worms() && B != null && B.controlling)
+		holder.icon_state = "hudbrainworm"
 	else
 		switch(virus_threat)
 			if(DISEASE_SEVERITY_BIOHAZARD)
