@@ -56,4 +56,4 @@
 
 /datum/borer_chem/rezadone
 	chemname = "rezadone"
-	chem_desc = "Heals cellular damage."."
+	chem_desc = "Heals cellular damage."

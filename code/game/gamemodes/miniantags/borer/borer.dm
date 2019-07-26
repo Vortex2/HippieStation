@@ -153,7 +153,6 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 	QDEL_NULL(punish_victim_action)
 	QDEL_NULL(jumpstart_host_action)
 
-
 	return ..()
 
 /mob/living/simple_animal/borer/Topic(href, href_list)//not entirely sure if this is even required
@@ -342,6 +341,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 		return
 
 	..()
+
 /mob/living/simple_animal/borer/verb/infect_victim()
 	set name = "Infest"
 	set category = "Borer"
@@ -581,6 +581,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 	talk_to_borer_action.Remove(victim)
 	victim = null
 	return
+
 /mob/living/simple_animal/borer/verb/jumpstart()
 	set category = "Borer"
 	set name = "Jumpstart Host"
@@ -838,6 +839,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 		to_chat(src, "Sugar nullifies your abilities, avoid it at all costs!")
 		to_chat(src, "You can speak to your fellow borers by prefixing your messages with ';'. Check out your Borer tab to see your abilities.")
 		to_chat(src, "You must escape with at least [GLOB.total_borer_hosts_needed] borers with hosts on the shuttle. To reproduce you must have 100 chemicals and be controlling a host.")
+
 /mob/living/simple_animal/borer/proc/detatch()
 	if(!victim || !controlling)
 		return
