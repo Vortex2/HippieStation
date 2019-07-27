@@ -76,7 +76,7 @@
 	range = -1
 	clothes_req = FALSE
 	var/obj/item/item
-	var/item_type = /obj/item/banhammer
+	var/item_type = /obj/item/melee/touch_attack
 	school = "conjuration"
 	charge_max = 150
 	cooldown_min = 10

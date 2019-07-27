@@ -35,6 +35,7 @@
 			H.dna.species.mutant_bodyparts |= "wings"
 		H.dna.features["wings"] = "Angel"
 		H.update_body()
+		H.internal_organs += new /obj/item/clothing/glasses/godeye
 	H.ventcrawler = VENTCRAWLER_ALWAYS
 	H.grant_all_languages(omnitongue=TRUE)
 	if(ishuman(H) && !fly)
@@ -166,6 +167,13 @@
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/jesus_ascend(null))
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/jesus_deconvert(null))
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/jesus_revive(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/area_teleport(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/voice_of_god(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/summonitem(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/conjure_item(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/pin(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/forcewall/hive(null))
+
 		H.see_invisible = SEE_INVISIBLE_OBSERVER
 	//.AddSpell(touch_attack)
 		H.update_sight()
@@ -176,5 +184,16 @@
 		H.setMovetype(H.movement_type & ~FLYING)
 		override_float = FALSE
 		H.pass_flags &= ~PASSTABLE
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/jesus_btw(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/aoe_turf/knock/jesus(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/self/jesus_ascend(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/jesus_deconvert(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/jesus_revive(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/area_teleport(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/voice_of_god(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/summonitem(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/conjure_item(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/pin(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/forcewall/hive(null))
 		H.incorporeal_move = NONE
 		H.CloseWings()

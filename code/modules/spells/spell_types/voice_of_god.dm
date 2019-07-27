@@ -10,7 +10,7 @@
 	action_icon_state = "voice_of_god"
 	var/command
 	var/cooldown_mod = 1
-	var/power_mod = 1
+	var/power_mod = 150
 	var/list/spans = list("colossus","yell")
 	var/speech_sound = 'sound/magic/clockwork/invoke_general.ogg'
 
