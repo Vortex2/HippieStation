@@ -7,14 +7,21 @@
 	default_features = list("mcolor" = "FFF", "tail_human" = "None", "ears" = "None", "wings" = "Angel")
 	use_skintones = 1
 	armor = 50
+	attack_type = BRAIN
 	exotic_bloodtype = "Godblood"
+	armour_penetration = 100
+	environment_smash = 3
+	allow_movement_on_non_turfs = TRUE
+	force_threshold = 50
 	limbs_id = "human"
 	skinned_type = /obj/item/stack/sheet/animalhide/human
 	inherent_traits = list(TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_IGNORESLOWDOWN, TRAIT_SLEEPIMMUNE, TRAIT_XRAY_VISION, TRAIT_NOSOFTCRIT,
-							TRAIT_NOGUNS, TRAIT_VIRUSIMMUNE, TRAIT_PIERCEIMMUNE, TRAIT_SHOCKIMMUNE, TRAIT_RADIMMUNE, TRAIT_NOHUNGER,
+							TRAIT_VIRUSIMMUNE, TRAIT_PIERCEIMMUNE, TRAIT_SHOCKIMMUNE, TRAIT_RADIMMUNE, TRAIT_NOHUNGER,
 							TRAIT_NOLIMBDISABLE, TRAIT_NOBREATH, TRAIT_STABLEHEART, TRAIT_RESISTCOLD, TRAIT_RESISTHEAT, TRAIT_STUNIMMUNE,
 							TRAIT_NODISMEMBER, TRAIT_NOFIRE, TRAIT_NODEATH,TRAIT_LIMBATTACHMENT,TRAIT_NOCRITDAMAGE,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,
-							TRAIT_TIMELESS,TRAIT_NOSLIPALL,TRAIT_MAGIC_CHOKE,TRAIT_STRONG_GRABBER,TRAIT_THERMAL_VISION,EYE_OF_GOD_TRAIT,HAND_REPLACEMENT_TRAIT)
+							TRAIT_TIMELESS,TRAIT_NOSLIPALL,TRAIT_MAGIC_CHOKE,TRAIT_STRONG_GRABBER,TRAIT_THERMAL_VISION,EYE_OF_GOD_TRAIT,HAND_REPLACEMENT_TRAIT,TRAIT_ALWAYS_CLEAN,
+							GAUNTLET_TRAIT,LAG_STONE_TRAIT,SUPERMATTER_STONE_TRAIT,SYNDIE_STONE_TRAIT,BLUESPACE_STONE_TRAIT,GHOST_STONE_TRAIT,TRAIT_SIXTHSENSE,TRAIT_XRAY_VISION,TRAIT_SURGEON,
+							TRAIT_NOHARDCRIT,TRAIT_STABLELIVER,TRAIT_PACIFISM,)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | ERT_SPAWN
 
 
@@ -139,17 +146,28 @@
 
 /datum/species/angel/proc/ToggleFlight(mob/living/carbon/human/H,flight)
 	if(flight && CanFly(H))
-		stunmod = 2
-		speedmod = -0.35
+		stunmod = 1
+		//speedmod = -0.35
 		H.setMovetype(H.movement_type | FLYING)
 		override_float = TRUE
 		H.pass_flags |= PASSTABLE
 		H.incorporeal_move = INCORPOREAL_MOVE_BASIC
-		ADD_TRAIT(H, TRAIT_SIXTHSENSE, GHOST_STONE_TRAIT)
-		ADD_TRAIT(H, TRAIT_XRAY_VISION, GHOST_STONE_TRAIT)
+//		ADD_TRAIT(H, TRAIT_SIXTHSENSE, GHOST_STONE_TRAIT)
+//		ADD_TRAIT(H, TRAIT_XRAY_VISION, GHOST_STONE_TRAIT)
 		H.dna.add_mutation(SPACEMUT)
 		H.dna.add_mutation(TK)
+		H.dna.add_mutation(FIREBREATH)
+		H.dna.add_mutation(OLFACTION)
+		H.dna.add_mutation(GLOW)
+		H.dna.add_mutation(ANTENNA)
+	//	H.dna.add_mutation(ANTIMAGICMUT)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/jesus_btw(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/knock/jesus(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/jesus_ascend(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/jesus_deconvert(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/jesus_revive(null))
 		H.see_invisible = SEE_INVISIBLE_OBSERVER
+	//.AddSpell(touch_attack)
 		H.update_sight()
 		H.OpenWings()
 	else

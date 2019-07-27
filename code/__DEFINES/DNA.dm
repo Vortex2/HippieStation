@@ -47,8 +47,14 @@
 #define BADBLINK	/datum/mutation/human/badblink
 #define SPASTIC		/datum/mutation/human/spastic
 #define EXTRASTUN	/datum/mutation/human/extrastun
-#define GELADIKINESIS		/datum/mutation/human/geladikinesis
+#define GELADIKINESIS /datum/mutation/human/geladikinesis
 #define CRYOKINESIS /datum/mutation/human/cryokinesis
+#define OLFACTION /datum/mutation/human/olfaction
+#define ANTENNA /datum/mutation/human/antenna
+#define MINDREADER /datum/mutation/human/mindreader
+#define SHOCK /datum/mutation/human/shock
+#define GLOW /datum/mutation/human/glow
+#define INSULATED /datum/mutation/human/insulated
 
 #define UI_CHANGED "ui changed"
 #define UE_CHANGED "ue changed"

@@ -405,7 +405,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 	victim = C
 	forceMove(victim)
 
-//	RemoveBorerActions()
+	RemoveBorerActions()
 	GrantInfestActions()
 
 	log_game("[src]/([src.ckey]) has infested [victim]/([victim.ckey]")
@@ -416,26 +416,24 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 	set desc = "Push some chemicals into your host's bloodstream."
 
 	if(!victim)
-		to_chat(src, "<span class='warning'>You are not inside a host body.</span>")
+		to_chat(src, "You are not inside a host body.")
 		return
 
-	if(stat != CONSCIOUS)
-		to_chat(src, "<span class='warning'>You cannot secrete chemicals in your current state.</span>")
+	if(stat)
+		to_chat(src, "You cannot secrete chemicals in your current state.")
 
 	if(docile)
-		to_chat(src, "<span class='warning'>You are feeling far too docile to do that.</span>")
+		to_chat(src, "<font color='blue'> You are feeling far too docile to do that.</font>")
 		return
 
 	var content = ""
-	content += "<p>Chemicals: <span id='chemicals'>[chemicals]</span></p>"
 
 	content += "<table>"
 
 	for(var/datum in typesof(/datum/borer_chem))
-		var/datum/borer_chem/C = new datum()
+		var/datum/borer_chem/C = datum
 		if(C.chemname)
 			content += "<tr><td><a class='chem-select' href='?_src_=\ref[src];src=\ref[src];borer_use_chem=[C.chemname]'>[C.chemname] ([C.chemuse])</a><p>[C.chem_desc]</p></td></tr>"
-
 	content += "</table>"
 
 	var/html = get_html_template(content)
@@ -444,6 +442,42 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 10)
 	usr << browse(html, "window=ViewBorer\ref[src]Chems;size=600x800")
 
 	return
+
+/mob/living/simple_animal/borer/Topic(href, href_list, hsrc)
+	if(href_list["ghostjoin"])
+		var/mob/dead/observer/ghost = usr
+		if(istype(ghost))
+			attack_ghost(ghost)
+	if(href_list["borer_use_chem"])
+		locate(href_list["src"])
+		if(!istype(src, /mob/living/simple_animal/borer))
+			return
+
+		var/topic_chem = href_list["borer_use_chem"]
+		var/datum/borer_chem/C = null
+
+		for(var/datum in typesof(/datum/borer_chem))
+			var/datum/borer_chem/test = datum
+			if(initial(test.chemname) == topic_chem)
+				C = new test()
+				break
+
+		if(!C || !victim || controlling || !src || stat)
+			return
+		var/datum/reagent/R = GLOB.chemical_reagents_list[C.chemname]
+		if(chemicals < C.chemuse)
+			to_chat(src, "<span class='boldnotice'>You need [C.chemuse] chemicals stored to secrete [R.name]!</span>")
+			return
+
+		to_chat(src, "<span class='userdanger'>You squirt a measure of [R.name] from your reservoirs into [victim]'s bloodstream.</span>")
+		victim.reagents.add_reagent(C.chemname, C.quantity)
+		chemicals -= C.chemuse
+
+		// This is used because we use a static set of datums to determine what chems are available,
+		// instead of a table or something. Thus, when we instance it, we can safely delete it
+		qdel(C)
+	..()
+
 
 /mob/living/simple_animal/borer/verb/hide()
 	set category = "Borer"

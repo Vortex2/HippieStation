@@ -47,6 +47,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/deathsound //used to set the mobs deathsound on species change
 	var/list/special_step_sounds //Sounds to override barefeet walkng
 	var/grab_sound //Special sound for grabbing
+	var/allow_movement_on_non_turfs = FALSE
+	var/force_threshold = 0
 
 	// species-only traits. Can be found in DNA.dm
 	var/list/species_traits = list()
@@ -79,6 +81,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	//Think magic mirror and pride mirror, slime extract, ERT etc, see defines
 	//in __DEFINES/mobs.dm, defaults to NONE, so people actually have to think about it
 	var/changesource_flags = NONE
+
+	//Custom proc
+
+	var/armour_penetration = 0 //How much armour they ignore, as a flat reduction from the targets armour value
+	var/environment_smash = ENVIRONMENT_SMASH_NONE //Set to 1 to allow breaking of crates,lockers,racks,tables; 2 for walls; 3 for Rwalls
+
 ///////////
 // PROCS //
 ///////////
@@ -1245,7 +1253,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return FALSE
 
 		punchouttooth(target,user,rand(0,9),affecting) // hippie -- teethcode
-		
+
 		var/armor_block = target.run_armor_check(affecting, "melee")
 
 		playsound(target.loc, user.dna.species.attack_sound, 25, 1, -1)
