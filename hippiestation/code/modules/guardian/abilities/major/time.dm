@@ -18,7 +18,7 @@
 	human_req = FALSE
 	charge_max = 90 SECONDS
 	action_icon_state = "time"
-	var/length = 10 SECONDS
+	var/length = 20 SECONDS
 
 /obj/effect/proc_holder/spell/self/erase_time/cast(list/targets, mob/user)
 	if(!isturf(user.loc) && !isguardian(user))

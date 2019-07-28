@@ -9,8 +9,8 @@
 	action_icon = 'icons/mob/actions/actions_items.dmi'
 	action_icon_state = "voice_of_god"
 	var/command
-	var/cooldown_mod = 1
-	var/power_mod = 150
+	var/cooldown_mod = 0
+	var/power_mod = 300
 	var/list/spans = list("colossus","yell")
 	var/speech_sound = 'sound/magic/clockwork/invoke_general.ogg'
 

@@ -11,6 +11,7 @@
 	exotic_bloodtype = "Godblood"
 	armour_penetration = 100
 	environment_smash = 3
+	punchdamagehigh = INFINITY
 	allow_movement_on_non_turfs = TRUE
 	force_threshold = 50
 	limbs_id = "human"
@@ -21,7 +22,7 @@
 							TRAIT_NODISMEMBER, TRAIT_NOFIRE, TRAIT_NODEATH,TRAIT_LIMBATTACHMENT,TRAIT_NOCRITDAMAGE,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,
 							TRAIT_TIMELESS,TRAIT_NOSLIPALL,TRAIT_MAGIC_CHOKE,TRAIT_STRONG_GRABBER,TRAIT_THERMAL_VISION,EYE_OF_GOD_TRAIT,HAND_REPLACEMENT_TRAIT,TRAIT_ALWAYS_CLEAN,
 							GAUNTLET_TRAIT,LAG_STONE_TRAIT,SUPERMATTER_STONE_TRAIT,SYNDIE_STONE_TRAIT,BLUESPACE_STONE_TRAIT,GHOST_STONE_TRAIT,TRAIT_SIXTHSENSE,TRAIT_XRAY_VISION,TRAIT_SURGEON,
-							TRAIT_NOHARDCRIT,TRAIT_STABLELIVER,TRAIT_PACIFISM,)
+							TRAIT_NOHARDCRIT,TRAIT_STABLELIVER)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | ERT_SPAWN
 
 
@@ -35,9 +36,9 @@
 			H.dna.species.mutant_bodyparts |= "wings"
 		H.dna.features["wings"] = "Angel"
 		H.update_body()
-		H.internal_organs += new /obj/item/clothing/glasses/godeye
-	H.ventcrawler = VENTCRAWLER_ALWAYS
-	H.grant_all_languages(omnitongue=TRUE)
+		H.ventcrawler = VENTCRAWLER_ALWAYS
+		H.grant_all_languages(omnitongue=TRUE)
+		H.move_resist = INFINITY
 	if(ishuman(H) && !fly)
 		fly = new
 		fly.Grant(H)
@@ -153,8 +154,9 @@
 		override_float = TRUE
 		H.pass_flags |= PASSTABLE
 		H.incorporeal_move = INCORPOREAL_MOVE_BASIC
-//		ADD_TRAIT(H, TRAIT_SIXTHSENSE, GHOST_STONE_TRAIT)
-//		ADD_TRAIT(H, TRAIT_XRAY_VISION, GHOST_STONE_TRAIT)
+	//	H.lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+		H.layer = GHOST_LAYER
+		H.apply_status_effect(STATUS_EFFECT_GodMend)
 		H.dna.add_mutation(SPACEMUT)
 		H.dna.add_mutation(TK)
 		H.dna.add_mutation(FIREBREATH)
@@ -170,11 +172,17 @@
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/area_teleport(null))
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/voice_of_god(null))
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/summonitem(null))
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/conjure_item(null))
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/pin(null))
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/forcewall/hive(null))
-
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/telepathy(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/erase_time(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/bfs(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/the_world(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/aimed/checkmate(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/conjure_item(null))
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/summonitem(null))
 		H.see_invisible = SEE_INVISIBLE_OBSERVER
+
 	//.AddSpell(touch_attack)
 		H.update_sight()
 		H.OpenWings()
@@ -184,6 +192,8 @@
 		H.setMovetype(H.movement_type & ~FLYING)
 		override_float = FALSE
 		H.pass_flags &= ~PASSTABLE
+		H.layer = MOB_LAYER
+		H.remove_status_effect(STATUS_EFFECT_GodMend)
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/jesus_btw(null))
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/aoe_turf/knock/jesus(null))
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/self/jesus_ascend(null))
@@ -192,8 +202,14 @@
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/area_teleport(null))
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/voice_of_god(null))
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/summonitem(null))
-		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/conjure_item(null))
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/pin(null))
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/forcewall/hive(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/telepathy(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/self/erase_time(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/self/bfs(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/self/the_world(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/aimed/checkmate(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/conjure_item(null))
+		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/summonitem(null))
 		H.incorporeal_move = NONE
 		H.CloseWings()

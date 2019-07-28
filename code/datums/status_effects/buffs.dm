@@ -425,7 +425,7 @@
 //Being on fire will suppress this healing
 /datum/status_effect/fleshmend
 	id = "fleshmend"
-	duration = 100
+	duration = 250
 	alert_type = /obj/screen/alert/status_effect/fleshmend
 
 /datum/status_effect/fleshmend/tick()
@@ -438,8 +438,28 @@
 	owner.adjustFireLoss(-5, FALSE)
 	owner.adjustOxyLoss(-10)
 
+/datum/status_effect/GodMend
+	id = "GodMend"
+	duration = INFINITY
+	alert_type = /obj/screen/alert/status_effect/fleshmend
+
+/datum/status_effect/GodMend/tick()
+	if(owner.on_fire)
+		linked_alert.icon_state = "fleshmend_fire"
+		return
+	else
+		linked_alert.icon_state = "GodMend"
+	owner.adjustBruteLoss(-25, FALSE)
+	owner.adjustFireLoss(-25, FALSE)
+	owner.adjustOxyLoss(-25)
+
 /obj/screen/alert/status_effect/fleshmend
 	name = "Fleshmend"
+	desc = "Our wounds are rapidly healing. <i>This effect is prevented if we are on fire.</i>"
+	icon_state = "fleshmend"
+
+	/obj/screen/alert/status_effect/GodMend
+	name = "GodMend"
 	desc = "Our wounds are rapidly healing. <i>This effect is prevented if we are on fire.</i>"
 	icon_state = "fleshmend"
 
@@ -532,19 +552,19 @@
 			if(L.health < L.maxHealth)
 				new /obj/effect/temp_visual/heal(get_turf(L), "#375637")
 			if(iscarbon(L))
-				L.adjustBruteLoss(-3.5)
-				L.adjustFireLoss(-3.5)
-				L.adjustToxLoss(-3.5, forced = TRUE) //Because Slime People are people too
-				L.adjustOxyLoss(-3.5)
-				L.adjustStaminaLoss(-3.5)
-				L.adjustBrainLoss(-3.5)
-				L.adjustCloneLoss(-1) //Becasue apparently clone damage is the bastion of all health
+				L.adjustBruteLoss(-15.5)
+				L.adjustFireLoss(-15.5)
+				L.adjustToxLoss(-15.5, forced = TRUE) //Because Slime People are people too
+				L.adjustOxyLoss(-15.5)
+				L.adjustStaminaLoss(-15.5)
+				L.adjustBrainLoss(-15.5)
+				L.adjustCloneLoss(-15) //Becasue apparently clone damage is the bastion of all health
 			else if(issilicon(L))
-				L.adjustBruteLoss(-3.5)
-				L.adjustFireLoss(-3.5)
+				L.adjustBruteLoss(-15.5)
+				L.adjustFireLoss(-15.5)
 			else if(isanimal(L))
 				var/mob/living/simple_animal/SM = L
-				SM.adjustHealth(-3.5, forced = TRUE)
+				SM.adjustHealth(-15.5, forced = TRUE)
 
 /datum/status_effect/good_music
 	id = "Good Music"

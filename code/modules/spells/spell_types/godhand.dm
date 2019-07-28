@@ -11,7 +11,7 @@
 	item_state = null
 	item_flags = NEEDS_PERMIT | ABSTRACT | DROPDEL
 	w_class = WEIGHT_CLASS_HUGE
-	force = 9999999999
+	force = 0
 	throwforce = 0
 	throw_range = 0
 	throw_speed = 0
