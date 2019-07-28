@@ -154,14 +154,17 @@
 		override_float = TRUE
 		H.pass_flags |= PASSTABLE
 		H.incorporeal_move = INCORPOREAL_MOVE_BASIC
-	//	H.lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+		H.lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+	//	H.invisibility = INVISIBILITY_MAXIMUM
+		H.see_in_dark = 8
 		H.layer = GHOST_LAYER
+	//	H.see_invisible = 999
 		H.apply_status_effect(STATUS_EFFECT_GodMend)
 		H.dna.add_mutation(SPACEMUT)
 		H.dna.add_mutation(TK)
 		H.dna.add_mutation(FIREBREATH)
 		H.dna.add_mutation(OLFACTION)
-		H.dna.add_mutation(GLOW)
+	//	H.dna.add_mutation(GLOW)
 		H.dna.add_mutation(ANTENNA)
 	//	H.dna.add_mutation(ANTIMAGICMUT)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/jesus_btw(null))
@@ -180,10 +183,7 @@
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/the_world(null))
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/aimed/checkmate(null))
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/conjure_item(null))
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/summonitem(null))
 		H.see_invisible = SEE_INVISIBLE_OBSERVER
-
-	//.AddSpell(touch_attack)
 		H.update_sight()
 		H.OpenWings()
 	else
@@ -193,6 +193,7 @@
 		override_float = FALSE
 		H.pass_flags &= ~PASSTABLE
 		H.layer = MOB_LAYER
+	//	H.invisibility = NONE
 		H.remove_status_effect(STATUS_EFFECT_GodMend)
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/jesus_btw(null))
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/aoe_turf/knock/jesus(null))
@@ -210,6 +211,5 @@
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/self/the_world(null))
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/aimed/checkmate(null))
 		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/conjure_item(null))
-		H.mind.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/summonitem(null))
 		H.incorporeal_move = NONE
 		H.CloseWings()
